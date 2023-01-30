@@ -14,7 +14,7 @@ private:
 	float time;
 
 public:
-	UEUtilsLogger(float time, FColor color);
+	UEUtilsLogger(float time=10.0f, FColor color=FColor::Red);
 	~UEUtilsLogger();
 
 	void LOG(FString msg);

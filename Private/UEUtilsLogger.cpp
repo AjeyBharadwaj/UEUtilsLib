@@ -15,6 +15,6 @@ UEUtilsLogger::~UEUtilsLogger()
 
 void UEUtilsLogger::LOG(FString msg) {
 	if (GEngine) { 
-		GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Yellow, msg); 
+		GEngine->AddOnScreenDebugMessage(-1, this->time, this->color, msg); 
 	}
 }

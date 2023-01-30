@@ -16,10 +16,15 @@ class UEUTILSLIB_API AUEUtilsBaseBall : public AActor
 	
 private:
 	UEUtilsLogger* logger;
+	UStaticMeshComponent* SphereMesh;
+
+
+	void init(const TCHAR* path);
 
 public:	
 	// Sets default values for this actor's properties
 	AUEUtilsBaseBall();
+	AUEUtilsBaseBall(const TCHAR*);
 
 protected:
 	// Called when the game starts or when spawned
