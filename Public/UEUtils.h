@@ -13,4 +13,8 @@ namespace UEUtils {
 	AActor* SpawnActor(UWorld* world, UClass* uclass, FVector location, FRotator rotator, FActorSpawnParameters spawnInfo);
 	AActor* SpawnActor(UWorld* world, UClass* uclass, FVector location, FRotator rotator);
 	AActor* SpawnActor(UWorld* world, UClass* uclass);
+
+	AActor* SpawnActorDeffered(UWorld* world, UClass* uclass, FTransform spawnLocAndRotation);
+	void SpawnActorDefferedFinish(UWorld* world, AActor* actor, FTransform spawnLocAndRotation);
+
 };

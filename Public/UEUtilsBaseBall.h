@@ -18,13 +18,15 @@ private:
 	UEUtilsLogger* logger;
 	UStaticMeshComponent* SphereMesh;
 
-
-	void init(const TCHAR* path);
-
 public:	
 	// Sets default values for this actor's properties
 	AUEUtilsBaseBall();
 	AUEUtilsBaseBall(const TCHAR*);
+
+	void init(const void* path);
+
+	void EnableGravity(bool enable=true);
+	void EnablePhysics(bool enable = true);
 
 protected:
 	// Called when the game starts or when spawned

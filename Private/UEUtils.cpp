@@ -20,3 +20,12 @@ AActor* UEUtils::SpawnActor(UWorld* world, UClass* uclass) {
 	return SpawnActor(world, uclass, FVector(0.0f), FRotator(0.0f));
 }
 
+AActor* UEUtils::SpawnActorDeffered(UWorld* world, UClass* uclass, FTransform spawnLocAndRotation) {
+	utilsLogger.LOG("Actor Spawnned deffered");
+	return world->SpawnActorDeferred<AActor>(uclass, spawnLocAndRotation);
+}
+
+void UEUtils::SpawnActorDefferedFinish(UWorld* world, AActor *actor, FTransform spawnLocAndRotation) {
+	utilsLogger.LOG("Actor Spawnned deffered finshed");
+	actor->FinishSpawning(spawnLocAndRotation);
+}
