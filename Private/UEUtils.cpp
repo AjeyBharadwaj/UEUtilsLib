@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Math/UnrealMathUtility.h"
 #include "UEUtils.h"
 
-static UEUtilsLogger utilsLogger;
+UEUtilsLogger logger;
 
 AActor* UEUtils::SpawnActor(UWorld *world, UClass *uclass, FVector location, FRotator rotator, FActorSpawnParameters spawnInfo) {
-	utilsLogger.LOG("Actor Spawnned");
+	logger.LOG("Actor Spawnned");
 
 	return world->SpawnActor<AActor>(uclass, location, rotator, spawnInfo);
 }
@@ -21,11 +22,15 @@ AActor* UEUtils::SpawnActor(UWorld* world, UClass* uclass) {
 }
 
 AActor* UEUtils::SpawnActorDeffered(UWorld* world, UClass* uclass, FTransform spawnLocAndRotation) {
-	utilsLogger.LOG("Actor Spawnned deffered");
+	logger.LOG("Actor Spawnned deffered");
 	return world->SpawnActorDeferred<AActor>(uclass, spawnLocAndRotation);
 }
 
 void UEUtils::SpawnActorDefferedFinish(UWorld* world, AActor *actor, FTransform spawnLocAndRotation) {
-	utilsLogger.LOG("Actor Spawnned deffered finshed");
+	logger.LOG("Actor Spawnned deffered finshed");
 	actor->FinishSpawning(spawnLocAndRotation);
+}
+
+float UEUtils::RandomFloat(float min, float max) {
+	return FMath::RandRange(min, max);
 }

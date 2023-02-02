@@ -10,9 +10,9 @@ AUEUtilsBasePawn::AUEUtilsBasePawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	this->logger = new UEUtilsLogger(10.0f, FColor::Red);
+	this->logger = new UEUtilsLogger(LOGTYPE::ONLY_CONSOLE, 10.0f, FColor::Red);
 
-	this->logger->LOG("PAWN Created");
+	LOGME("PAWN Created");
 
 
 	this->cameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
@@ -78,7 +78,7 @@ void AUEUtilsBasePawn::ButtonPressed() {
 	else if (i == 1) {
 		FTransform spawnLocAndRotation;
 
-		spawnLocAndRotation.SetLocation(FVector(100.0f, -150.0f, 100.0f));
+		spawnLocAndRotation.SetLocation(FVector(UEUtils::RandomFloat(-100.0f, 100.0f), UEUtils::RandomFloat(-150.0f, -100.0f), UEUtils::RandomFloat(300.0f, 400.0f)));
 
 		AUEUtilsBaseBall*actor = (AUEUtilsBaseBall *)UEUtils::SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
 		UEUtils::SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);

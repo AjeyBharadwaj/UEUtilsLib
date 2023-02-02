@@ -4,18 +4,27 @@
 
 #include "CoreMinimal.h"
 
+#define LOGME(msg) this->logger->LOG(msg, __FUNCTION__, __LINE__)
+
+enum LOGTYPE {
+	ONLY_SCREEN,
+	ONLY_CONSOLE,
+	SCREEN_AND_CONSOLE,
+};
+
 /**
  * 
  */
 class UEUTILSLIB_API UEUtilsLogger
 {
 private:
+	LOGTYPE logtype;
 	FColor color;
 	float time;
 
 public:
-	UEUtilsLogger(float time=10.0f, FColor color=FColor::Red);
+	UEUtilsLogger(LOGTYPE logtype = LOGTYPE::ONLY_CONSOLE, float time=10.0f, FColor color=FColor::Red);
 	~UEUtilsLogger();
 
-	void LOG(FString msg);
+	inline void LOG(FString msg, FString func="", int line = -1);
 };

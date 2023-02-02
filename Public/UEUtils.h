@@ -17,4 +17,6 @@ namespace UEUtils {
 	AActor* SpawnActorDeffered(UWorld* world, UClass* uclass, FTransform spawnLocAndRotation);
 	void SpawnActorDefferedFinish(UWorld* world, AActor* actor, FTransform spawnLocAndRotation);
 
+	float RandomFloat(float min=0.0f, float max=1.0f);
+
 };
