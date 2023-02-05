@@ -17,7 +17,6 @@ class UEUTILSLIB_API AUEUtilsBaseBall : public AUEUtilsBaseActor
 	
 private:
 	UEUtilsLogger* logger;
-	UStaticMeshComponent* SphereMesh;
 
 public:	
 	// Sets default values for this actor's properties

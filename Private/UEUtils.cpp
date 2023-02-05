@@ -34,3 +34,7 @@ void UEUtils::SpawnActorDefferedFinish(UWorld* world, AActor *actor, FTransform 
 float UEUtils::RandomFloat(float min, float max) {
 	return FMath::RandRange(min, max);
 }
+
+void UEUtils::AddImpulse(UStaticMeshComponent* mesh, FVector Impulse, FName BoneName, bool bVelChange) {
+	mesh->AddImpulse(Impulse, BoneName, bVelChange);
+}

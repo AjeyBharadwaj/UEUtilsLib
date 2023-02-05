@@ -58,19 +58,19 @@ void AUEUtilsBasePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 }
 
 void AUEUtilsBasePawn::ButtonPressed() {
-	int i = 1;
+	int i = 2;
 
 	Super::BeginPlay();
 
 	if (i == 0) {
-		this->logger->LOG("Begine Play");
+		LOGME("Begine Play");
 
 		FVector Location(100.0f, -150.0f, 30.0f);
 		FRotator Rotator(0.0f, 0.0f, 0.0f);
 
 		UEUtils::SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass(), Location, Rotator);
 
-		this->logger->LOG("Tried to spawn Created");
+		LOGME("Tried to spawn Created");
 
 		Location.Y = 100.0f;
 		UEUtils::SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass(), Location, Rotator);
@@ -85,6 +85,21 @@ void AUEUtilsBasePawn::ButtonPressed() {
 
 		actor->EnablePhysics();
 		actor->EnableGravity();
+	}
+
+	else if (i == 2) {
+		FTransform spawnLocAndRotation;
+
+		spawnLocAndRotation.SetLocation(FVector(UEUtils::RandomFloat(-100.0f, 100.0f), UEUtils::RandomFloat(-150.0f, -100.0f), UEUtils::RandomFloat(300.0f, 400.0f)));
+
+		AUEUtilsBaseBall* actor = (AUEUtilsBaseBall*)UEUtils::SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
+		UEUtils::SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);
+
+		actor->EnablePhysics();
+		//actor->EnableGravity();
+
+		UEUtils::AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -1000.0f, 0.0f), "NONE", true);
+
 	}
 }
 

@@ -19,4 +19,6 @@ namespace UEUtils {
 
 	float RandomFloat(float min=0.0f, float max=1.0f);
 
+	void AddImpulse(UStaticMeshComponent* mesh, FVector Impulse, FName BoneName, bool bVelChange);
+
 };

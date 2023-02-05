@@ -27,6 +27,8 @@ public:
 	void EnableGravity(bool enable = true);
 	void EnablePhysics(bool enable = true);
 
+	UStaticMeshComponent* getStaticMeshComponent();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

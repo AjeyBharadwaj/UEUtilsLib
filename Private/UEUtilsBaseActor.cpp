@@ -57,3 +57,7 @@ void AUEUtilsBaseActor::EnableGravity(bool enable) {
 	//this->SphereMesh->AddImpulse
 }
 
+UStaticMeshComponent* AUEUtilsBaseActor::getStaticMeshComponent() {
+	return this->staticMesh;
+}
+
