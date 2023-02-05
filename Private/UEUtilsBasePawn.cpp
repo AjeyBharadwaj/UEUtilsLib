@@ -14,6 +14,8 @@ AUEUtilsBasePawn::AUEUtilsBasePawn()
 
 	LOGME("PAWN Created");
 
+	ueutils = new UEUtils();
+
 
 	this->cameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	RootComponent = this->cameraComponent;
@@ -30,8 +32,8 @@ AUEUtilsBasePawn::AUEUtilsBasePawn()
 	this->cameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 	*/
 
-	//UEUtils::SpawnActor<AUEUtilsBaseBall>(GetWorld());
-	//UEUtils::SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass());
+	//ueutils->SpawnActor<AUEUtilsBaseBall>(GetWorld());
+	//ueutils->SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass());
 	
 
 }
@@ -68,20 +70,20 @@ void AUEUtilsBasePawn::ButtonPressed() {
 		FVector Location(100.0f, -150.0f, 30.0f);
 		FRotator Rotator(0.0f, 0.0f, 0.0f);
 
-		UEUtils::SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass(), Location, Rotator);
+		ueutils->SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass(), Location, Rotator);
 
 		LOGME("Tried to spawn Created");
 
 		Location.Y = 100.0f;
-		UEUtils::SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass(), Location, Rotator);
+		ueutils->SpawnActor(GetWorld(), AUEUtilsBaseBall::StaticClass(), Location, Rotator);
 	}
 	else if (i == 1) {
 		FTransform spawnLocAndRotation;
 
-		spawnLocAndRotation.SetLocation(FVector(UEUtils::RandomFloat(-100.0f, 100.0f), UEUtils::RandomFloat(-150.0f, -100.0f), UEUtils::RandomFloat(300.0f, 400.0f)));
+		spawnLocAndRotation.SetLocation(FVector(ueutils->RandomFloat(-100.0f, 100.0f), ueutils->RandomFloat(-150.0f, -100.0f), ueutils->RandomFloat(300.0f, 400.0f)));
 
-		AUEUtilsBaseBall*actor = (AUEUtilsBaseBall *)UEUtils::SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
-		UEUtils::SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);
+		AUEUtilsBaseBall*actor = (AUEUtilsBaseBall *)ueutils->SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
+		ueutils->SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);
 
 		actor->EnablePhysics();
 		actor->EnableGravity();
@@ -90,15 +92,17 @@ void AUEUtilsBasePawn::ButtonPressed() {
 	else if (i == 2) {
 		FTransform spawnLocAndRotation;
 
-		spawnLocAndRotation.SetLocation(FVector(UEUtils::RandomFloat(-100.0f, 100.0f), UEUtils::RandomFloat(-150.0f, -100.0f), UEUtils::RandomFloat(300.0f, 400.0f)));
+		spawnLocAndRotation.SetLocation(FVector(ueutils->RandomFloat(-100.0f, 100.0f), ueutils->RandomFloat(300.0f, 200.0f), ueutils->RandomFloat(300.0f, 400.0f)));
 
-		AUEUtilsBaseBall* actor = (AUEUtilsBaseBall*)UEUtils::SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
-		UEUtils::SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);
+		AUEUtilsBaseBall* actor = (AUEUtilsBaseBall*)ueutils->SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
+		ueutils->SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);
+
+		ueutils->SetScale(actor, FVector(.5, .5, .5));
 
 		actor->EnablePhysics();
-		//actor->EnableGravity();
+		actor->EnableGravity();
 
-		UEUtils::AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -1000.0f, 0.0f), "NONE", true);
+		ueutils->AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -1000.0f, 0.0f), "NONE", true);
 
 	}
 }

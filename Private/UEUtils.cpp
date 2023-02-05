@@ -3,10 +3,16 @@
 #include "Math/UnrealMathUtility.h"
 #include "UEUtils.h"
 
-UEUtilsLogger logger;
+UEUtils::UEUtils() {
+	this->logger = new UEUtilsLogger(LOGTYPE::ONLY_CONSOLE, 10.0f, FColor::Red);
+}
+
+UEUtils::~UEUtils() {
+
+}
 
 AActor* UEUtils::SpawnActor(UWorld *world, UClass *uclass, FVector location, FRotator rotator, FActorSpawnParameters spawnInfo) {
-	logger.LOG("Actor Spawnned");
+	LOGME("Actor Spawnned");
 
 	return world->SpawnActor<AActor>(uclass, location, rotator, spawnInfo);
 }
@@ -22,12 +28,12 @@ AActor* UEUtils::SpawnActor(UWorld* world, UClass* uclass) {
 }
 
 AActor* UEUtils::SpawnActorDeffered(UWorld* world, UClass* uclass, FTransform spawnLocAndRotation) {
-	logger.LOG("Actor Spawnned deffered");
+	LOGME("Actor Spawnned deffered");
 	return world->SpawnActorDeferred<AActor>(uclass, spawnLocAndRotation);
 }
 
 void UEUtils::SpawnActorDefferedFinish(UWorld* world, AActor *actor, FTransform spawnLocAndRotation) {
-	logger.LOG("Actor Spawnned deffered finshed");
+	LOGME("Actor Spawnned deffered finshed");
 	actor->FinishSpawning(spawnLocAndRotation);
 }
 
@@ -37,4 +43,8 @@ float UEUtils::RandomFloat(float min, float max) {
 
 void UEUtils::AddImpulse(UStaticMeshComponent* mesh, FVector Impulse, FName BoneName, bool bVelChange) {
 	mesh->AddImpulse(Impulse, BoneName, bVelChange);
+}
+
+void UEUtils::SetScale(AActor* actor, FVector scale) {
+	actor->SetActorScale3D(scale);
 }

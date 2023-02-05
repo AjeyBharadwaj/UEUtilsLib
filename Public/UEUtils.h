@@ -8,7 +8,12 @@
 
 #include "UEUtilsLogger.h"
 
-namespace UEUtils {
+class UEUTILSLIB_API UEUtils {
+public:
+	UEUtilsLogger* logger;
+	UEUtils();
+	~UEUtils();
+
 	//TODO : Can we add default parameters and everything same ?
 	AActor* SpawnActor(UWorld* world, UClass* uclass, FVector location, FRotator rotator, FActorSpawnParameters spawnInfo);
 	AActor* SpawnActor(UWorld* world, UClass* uclass, FVector location, FRotator rotator);
@@ -20,5 +25,7 @@ namespace UEUtils {
 	float RandomFloat(float min=0.0f, float max=1.0f);
 
 	void AddImpulse(UStaticMeshComponent* mesh, FVector Impulse, FName BoneName, bool bVelChange);
+
+	void SetScale(AActor *actor, FVector scale);
 
 };

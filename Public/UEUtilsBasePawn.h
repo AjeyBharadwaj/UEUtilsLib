@@ -7,6 +7,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 
+#include "UEUtils.h"
+
 #include "UEUtilsLogger.h"
 
 #include "UEUtilsBasePawn.generated.h"
@@ -20,6 +22,8 @@ private:
 	UEUtilsLogger *logger;
 	UCameraComponent* cameraComponent;
 	USpringArmComponent* cameraBoom;
+
+	UEUtils* ueutils;
 
 public:
 	// Sets default values for this pawn's properties
