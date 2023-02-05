@@ -100,9 +100,9 @@ void AUEUtilsBasePawn::ButtonPressed() {
 		ueutils->SetScale(actor, FVector(.5, .5, .5));
 
 		actor->EnablePhysics();
-		actor->EnableGravity();
+		//actor->EnableGravity();
 
-		ueutils->AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -1000.0f, 0.0f), "NONE", true);
+		ueutils->AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -500.0f, 0.0f), "NONE", true);
 
 	}
 }

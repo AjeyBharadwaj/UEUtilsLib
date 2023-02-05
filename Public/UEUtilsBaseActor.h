@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 
+#include "UEUtils.h"
 #include "UEUtilsLogger.h"
 
 #include "UEUtilsBaseActor.generated.h"
@@ -15,6 +16,7 @@ class UEUTILSLIB_API AUEUtilsBaseActor : public AActor
 	GENERATED_BODY()
 	
 protected:
+	UEUtils* ueutils;
 	UEUtilsLogger* logger;
 	UStaticMeshComponent* staticMesh;
 

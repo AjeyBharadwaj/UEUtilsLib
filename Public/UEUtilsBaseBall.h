@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 
-#include "UEUtilsLogger.h"
 #include "UEUtilsBaseActor.h"
+#include "UEUtilsLogger.h"
 
 #include "UEUtilsBaseBall.generated.h"
 

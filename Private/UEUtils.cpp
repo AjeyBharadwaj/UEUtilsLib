@@ -48,3 +48,13 @@ void UEUtils::AddImpulse(UStaticMeshComponent* mesh, FVector Impulse, FName Bone
 void UEUtils::SetScale(AActor* actor, FVector scale) {
 	actor->SetActorScale3D(scale);
 }
+
+void UEUtils::SetMaterial(UStaticMeshComponent* mesh, const TCHAR* material) {
+	static ConstructorHelpers::FObjectFinder<UMaterial> FoundMaterial(material);
+	if (FoundMaterial.Succeeded())
+	{
+		LOGME("Setting material");
+		UMaterialInstanceDynamic* DynamicMaterialInst = UMaterialInstanceDynamic::Create(FoundMaterial.Object, mesh);
+		mesh->SetMaterial(0, DynamicMaterialInst);
+	}
+}

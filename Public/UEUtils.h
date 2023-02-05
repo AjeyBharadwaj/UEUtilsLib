@@ -4,8 +4,6 @@
 #include "Engine/World.h"
 #include "CoreMinimal.h"
 
-#include "UEUtilsBaseBall.h"
-
 #include "UEUtilsLogger.h"
 
 class UEUTILSLIB_API UEUtils {
@@ -27,5 +25,7 @@ public:
 	void AddImpulse(UStaticMeshComponent* mesh, FVector Impulse, FName BoneName, bool bVelChange);
 
 	void SetScale(AActor *actor, FVector scale);
+
+	void SetMaterial(UStaticMeshComponent* mesh, const TCHAR* material);
 
 };

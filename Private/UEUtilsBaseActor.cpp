@@ -3,8 +3,8 @@
 
 #include "UEUtilsBaseActor.h"
 
-void AUEUtilsBaseActor::init(const void* _path) {
-	TCHAR* path = (TCHAR*)_path;
+void AUEUtilsBaseActor::init(const void* staticMeshPath) {
+	TCHAR* path = (TCHAR*)staticMeshPath;
 	this->logger = new UEUtilsLogger(LOGTYPE::ONLY_CONSOLE, 10.0f, FColor::Red);
 
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -17,6 +17,8 @@ void AUEUtilsBaseActor::init(const void* _path) {
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(path);
 	this->staticMesh->SetStaticMesh(SphereMeshAsset.Object);
+
+	ueutils->SetMaterial(this->staticMesh, TEXT("/Game/StarterContent/Props/Materials/M_Shelf.M_Shelf"));
 }
 
 // Sets default values
@@ -24,13 +26,14 @@ AUEUtilsBaseActor::AUEUtilsBaseActor()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	ueutils = new UEUtils();
 }
 
 // Sets default values
 AUEUtilsBaseActor::AUEUtilsBaseActor(const TCHAR* path)
 {
-	PrimaryActorTick.bCanEverTick = true;	
+	PrimaryActorTick.bCanEverTick = true;
+	ueutils = new UEUtils();
 }
 
 // Called when the game starts or when spawned
