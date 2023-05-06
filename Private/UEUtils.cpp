@@ -58,3 +58,13 @@ void UEUtils::SetMaterial(UStaticMeshComponent* mesh, const TCHAR* material) {
 		mesh->SetMaterial(0, DynamicMaterialInst);
 	}
 }
+
+void UEUtils::SetMassInKg(UStaticMeshComponent* mesh, float mass)
+{
+	FBodyInstance* BodyInst = mesh->GetBodyInstance();
+
+	if (!BodyInst) return;
+	BodyInst->MassScale = mass;
+
+	BodyInst->UpdateMassProperties();
+}

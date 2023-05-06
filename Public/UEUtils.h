@@ -28,4 +28,6 @@ public:
 
 	void SetMaterial(UStaticMeshComponent* mesh, const TCHAR* material);
 
+	void SetMassInKg(UStaticMeshComponent* mesh, float mass);
+
 };

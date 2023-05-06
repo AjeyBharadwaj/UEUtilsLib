@@ -92,18 +92,20 @@ void AUEUtilsBasePawn::ButtonPressed() {
 	else if (i == 2) {
 		FTransform spawnLocAndRotation;
 
-		spawnLocAndRotation.SetLocation(FVector(ueutils->RandomFloat(-100.0f, 100.0f), ueutils->RandomFloat(300.0f, 200.0f), ueutils->RandomFloat(300.0f, 400.0f)));
+		spawnLocAndRotation.SetLocation(FVector(150.0f, 350, 250));
 
 		AUEUtilsBaseBall* actor = (AUEUtilsBaseBall*)ueutils->SpawnActorDeffered(GetWorld(), AUEUtilsBaseBall::StaticClass(), spawnLocAndRotation);
 		ueutils->SpawnActorDefferedFinish(GetWorld(), actor, spawnLocAndRotation);
 
-		ueutils->SetScale(actor, FVector(.5, .5, .5));
+		ueutils->SetScale(actor, FVector(.3, .3, .3));
 
 		actor->EnablePhysics();
 		//actor->EnableGravity();
 
-		ueutils->AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -500.0f, 0.0f), "NONE", true);
+		ueutils->AddImpulse(actor->getStaticMeshComponent(), FVector(0.0f, -1000.0f, 0.0f), "NONE", true);
 
+
+		ueutils->SetMassInKg(actor->getStaticMeshComponent(), 10);
 	}
 }
 
