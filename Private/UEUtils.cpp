@@ -74,7 +74,13 @@ void UEUtils::SetMassInKg(UStaticMeshComponent* mesh, float mass)
 // NOTE : Make sure Force No Precomputed Light is Turned On
 ADirectionalLight* UEUtils::CreateDirectionalLight(UWorld* world, FVector location, FRotator rotator) {
 	LOGME("Creating directional light");
-	return (ADirectionalLight *)SpawnActor(world, ADirectionalLight::StaticClass(), location, rotator);
+	if (world) {
+		return (ADirectionalLight*)SpawnActor(world, ADirectionalLight::StaticClass(), location, rotator);
+	}
+	else {
+		LOGME("World is NULL");
+		return NULL;
+	}
 }
 
 void UEUtils::SetAtmosphereSunLight(ADirectionalLight* light, bool value) {
