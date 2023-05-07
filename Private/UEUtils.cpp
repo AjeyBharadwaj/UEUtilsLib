@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Math/UnrealMathUtility.h"
 #include "UEUtils.h"
+#include "Components/DirectionalLightComponent.h"
+
+#include "Math/UnrealMathUtility.h"
 
 UEUtils::UEUtils() {
 	this->logger = new UEUtilsLogger(LOGTYPE::ONLY_CONSOLE, 10.0f, FColor::Red);
@@ -67,4 +69,54 @@ void UEUtils::SetMassInKg(UStaticMeshComponent* mesh, float mass)
 	BodyInst->MassScale = mass;
 
 	BodyInst->UpdateMassProperties();
+}
+
+// NOTE : Make sure Force No Precomputed Light is Turned On
+ADirectionalLight* UEUtils::CreateDirectionalLight(UWorld* world, FVector location, FRotator rotator) {
+	LOGME("Creating directional light");
+	return (ADirectionalLight *)SpawnActor(world, ADirectionalLight::StaticClass(), location, rotator);
+}
+
+void UEUtils::SetAtmosphereSunLight(ADirectionalLight* light, bool value) {
+	UDirectionalLightComponent* comp = light->GetComponent();
+	if (comp) {
+		comp->SetAtmosphereSunLight(value);
+	}
+}
+
+/* 
+ * When PITCH goes beyond 90, YAW and ROLL changes. This is called Gimble Lock
+ * To fix it, we should set Quat instead of FRotator
+ * More Info : https://www.youtube.com/watch?app=desktop&v=KqbqZ3IY1II
+ * More Info : https://pastebin.com/DqBgCUkx
+ */
+FQuat Euler_To_Quaternion(FRotator Current_Rotation)
+{
+	FQuat q;                                            // Declare output quaternion
+	float yaw = Current_Rotation.Yaw * PI / 180;        // Convert degrees to radians 
+	float roll = Current_Rotation.Roll * PI / 180;
+	float pitch = Current_Rotation.Pitch * PI / 180;
+
+	double cy = cos(yaw * 0.5);
+	double sy = sin(yaw * 0.5);
+	double cr = cos(roll * 0.5);
+	double sr = sin(roll * 0.5);
+	double cp = cos(pitch * 0.5);
+	double sp = sin(pitch * 0.5);
+
+	q.W = cy * cr * cp + sy * sr * sp;
+	q.X = cy * sr * cp - sy * cr * sp;
+	q.Y = cy * cr * sp + sy * sr * cp;
+	q.Z = sy * cr * cp - cy * sr * sp;
+
+	return q;                                           // Return the quaternion of the input Euler rotation
+}
+
+void UEUtils::AddToSunLocation(ADirectionalLight* light, FRotator rotator) {
+	LOGME(Euler_To_Quaternion(rotator).ToString());
+	light->AddActorLocalRotation(Euler_To_Quaternion(rotator));
+}
+
+void UEUtils::SetSunMobility(ADirectionalLight* light, EComponentMobility::Type mobility) {
+	light->SetMobility(mobility);
 }

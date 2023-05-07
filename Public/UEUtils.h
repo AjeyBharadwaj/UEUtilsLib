@@ -2,7 +2,9 @@
 
 #pragma once
 #include "Engine/World.h"
+#include "Engine/EngineTypes.h"
 #include "CoreMinimal.h"
+#include "Engine/DirectionalLight.h"
 
 #include "UEUtilsLogger.h"
 
@@ -30,4 +32,9 @@ public:
 
 	void SetMassInKg(UStaticMeshComponent* mesh, float mass);
 
+	ADirectionalLight* CreateDirectionalLight(UWorld* world, FVector location, FRotator rotator);
+	void SetAtmosphereSunLight(ADirectionalLight* light, bool value);
+
+	void AddToSunLocation(ADirectionalLight* light, FRotator rotator);
+	void SetSunMobility(ADirectionalLight* light, EComponentMobility::Type mobility);
 };

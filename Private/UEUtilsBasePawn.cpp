@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "UEUtilsBasePawn.h"
+
 #include "UEUtils.h"
 #include "UEUtilsBaseBall.h"
-
-#include "UEUtilsBasePawn.h"
 
 // Sets default values
 AUEUtilsBasePawn::AUEUtilsBasePawn()
